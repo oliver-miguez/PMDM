@@ -47,4 +47,3 @@ Vamos con todo en este viaje Kotlin 🚀
 
 ---
 
-*Hecho con ❤️ por [Tu Nombre]*  
