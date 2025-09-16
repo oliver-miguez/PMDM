@@ -1,8 +1,8 @@
 package example.myapp
 
 import kotlin.math.tan
-
-class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40) {
+//Si le damos open a la clase le estaremos permitiendo crear subclases
+open class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40) {
 /*
     var width: Int = 20
     var height: Int = 40
@@ -29,13 +29,16 @@ class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40)
     */
     constructor(numberOfFish: Int):this(){
         // 2000cm³ por pez + más un zona extra para no derramar el agua
-            val tank = numberOfFish * 2000 * 1.1
+        val tank = numberOfFish * 2000 * 1.1
         //calcular la altura necesaria
         height = (tank / (length * width)).toInt()
     }//end constructor secundario
 
-
-    var volumen: Int
+    /*
+    Como la clase tiene un open todas sus propiedades y variables ...
+    Deberían estar marcados como open
+     */
+    open var volumen: Int
         //getter de volumen
         get() = width * height * length / 1000  // 1000 cm³ = 1 l
         //Value es el valor que nosotros le añadamos en la clase Kotlin
@@ -43,11 +46,18 @@ class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40)
             height = (value * 1000) / (width * length)
         }
 
+    open var shape = "Rectangulo"
+
+    //Devuelve el 90% del volumen
+    open var water: Double = 0.0
+        get() = volumen * 0.9
+
     fun printSize() {
         println("Width: $width cm " +
                 "Length: $length cm " +
                 "Height: $height cm ")
         println("Volume:$volumen LITROS")
+        println("Volumen: $volumen L Water: $water L (${water/volumen * 100.0}% full) ")
     }
 
 
