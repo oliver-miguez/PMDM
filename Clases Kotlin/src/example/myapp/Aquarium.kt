@@ -35,7 +35,7 @@ open class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int 
     }//end constructor secundario
 
     /*
-    Como la clase tiene un open todas sus propiedades y variables ...
+    Como la clase tiene un "open" todas sus propiedades y variables ...
     Deberían estar marcados como open
      */
     open var volumen: Int
