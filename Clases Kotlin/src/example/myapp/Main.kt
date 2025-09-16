@@ -28,6 +28,16 @@ fun buildAquarium(){
 
     val aquarium7 = Aquarium(length = 25, width = 25, height = 25)
     aquarium7.printSize()
+
+    println("_________________________________---")
+
+    val aquarium8 = Aquarium(length = 25, width = 25, height = 25)
+    aquarium8.printSize()
+    println(aquarium8.shape)
+    val myTowerTank = TowerTank(40,25)
+    println(myTowerTank.shape)
+    myTowerTank.printSize()
+
 }
 
 fun main() {

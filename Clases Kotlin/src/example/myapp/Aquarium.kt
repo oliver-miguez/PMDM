@@ -1,5 +1,6 @@
 package example.myapp
 
+import kotlin.math.PI
 import kotlin.math.tan
 //Si le damos open a la clase le estaremos permitiendo crear subclases
 open class Aquarium(var length: Int = 100, var width: Int = 20, open var height: Int = 40) {
@@ -67,6 +68,14 @@ open class Aquarium(var length: Int = 100, var width: Int = 20, open var height:
 Crea una subclase de aquarium
 Usa diameter para dar valores a length y a width cuando se llama el constructor de la superclase
 Override es necesario para sobrescribir el valor, añadirle un nuevo valor
-Las subclases tienen que declarar si o si el constructor
+Las subclases tienen que declarar si o si el constructor tanto el suyo como el de la superclase
  */
-class TowerTank(override var height: Int , var diameter:Int): Aquarium(height= height, width = diameter, length = diameter)
+class TowerTank(override var height: Int , var diameter:Int): Aquarium(height= height, width = diameter, length = diameter){
+    override var volumen: Int
+        get() = (width/2 * length/2 * height / 1000 * PI).toInt()
+        set(value) {
+            height = ((value * 1000 / PI) / (width/2 * length/2)).toInt()
+        }
+    override var water = volumen * 0.8
+    override var shape = "Cilindro"
+}
