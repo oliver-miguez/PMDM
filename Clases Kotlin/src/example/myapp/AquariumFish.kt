@@ -1,20 +1,30 @@
 package example.myapp
 
-abstract class AquariumFish {
-    abstract val color: String
+class PrintingFishAction(val food: String) : FishAction {
+    override fun eat() {
+        println(food)
+    }
 }
 
 
-class Shark: AquariumFish(), FishAction {
+interface FishColor{
+    val color: String
+}
+
+interface FisheAction {
+    fun eat()
+}
+
+class Shark:FishAction , FishColor{
     override val color = "gray"
     override fun eat() {
         println("hunt and eat fish")
     }
 }
 
-class Plecostomus: AquariumFish(), FishAction {
-    override val color = "gold"
-    override fun eat() {
-        println("eat algae")
-    }
-}
+class Plecostomus(fishColor: FishColor = GoldColor):
+    FishColor by fishColor,
+    FishAction by PrintingFishAction("eat algae")
+
+
+
