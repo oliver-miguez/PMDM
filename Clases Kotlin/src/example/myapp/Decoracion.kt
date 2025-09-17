@@ -43,6 +43,8 @@ fun main(){
     println(Direction.EAST.ordinal)
     println(Direction.EAST.degrees)
     println(Color.RED)
+    var prueba1 = SeaLion()
+    println(matchSeal(prueba1))
 }
 
 //reescribimos la interfaz(podemos crear objets en archivos que no sean interfaces)
