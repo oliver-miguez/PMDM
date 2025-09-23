@@ -1,0 +1,36 @@
+import java.util.Scanner
+
+object MaquinaCafe {
+    var currentState:MaquinaCafeEstados = MaquinaCafeEstados.Idle
+
+    fun funcionamientoMaquina(){
+        when(currentState){
+            is MaquinaCafeEstados.Idle -> {
+                println("Esperando opciones")
+                currentState = MaquinaCafeEstados.Opciones
+
+
+            }is MaquinaCafeEstados.SoltarCafe -> {
+                println("Soltando cafe")
+            }is MaquinaCafeEstados.Opciones ->{
+                val sc: Scanner = Scanner(System.`in`)
+                println("1.Soltar Leche")
+                println("2.Calentar agua")
+                println("Elige una opcion: ")
+                val opcion:Int  = sc.nextInt()
+                    when(opcion){
+                        1 -> currentState = MaquinaCafeEstados.SoltarLeche
+                        2 -> currentState = MaquinaCafeEstados.CalentarAgua
+                    }
+            }is MaquinaCafeEstados.CalentarAgua -> {
+                println("Calentando el agua")
+            }is MaquinaCafeEstados.Error -> {
+            println("Hay algun error")
+            }is MaquinaCafeEstados.SoltarAzucar -> {
+                println("Soltando el azucar")
+            }is MaquinaCafeEstados.SoltarLeche -> {
+                println("Soltando Leche")
+            }
+        }
+    }
+}

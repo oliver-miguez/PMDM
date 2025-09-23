@@ -1,7 +1,6 @@
-object CoffeMachine {
-
-    object CoffeeMachine {
-        private var currentState: CoffeeMachineState = CoffeeMachineState.Idle // Al current states se le atribuye el valor de la clase sealed anterior
+object CoffeeMachine {
+        var estadoIdle = CoffeeMachineState.Idle()
+        var currentState: CoffeeMachineState = estadoIdle // Al current states se le atribuye el valor de la clase sealed anterior
 
         fun makeCoffee() {
             println("Estado actual: $currentState")
@@ -29,10 +28,8 @@ object CoffeMachine {
 
         fun clean() {
             println("Limpiando la máquina...")
-            currentState = CoffeeMachineState.Idle
+            currentState = estadoIdle
             println("Máquina limpia. Estado: $currentState")
         }
     }
 
-
-}
