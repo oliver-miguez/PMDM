@@ -6,7 +6,7 @@ object CoffeMachine {
         fun makeCoffee() {
             println("Estado actual: $currentState")
 
-            when (currentState) {
+            when (currentState) { // El when obliga a meter todas las opciones de la sealed class, es decir todos los estados
                 is CoffeeMachineState.Idle -> {
                     println("Máquina encendida. Empezando a hacer café...")
                     currentState = CoffeeMachineState.MakingCoffee
