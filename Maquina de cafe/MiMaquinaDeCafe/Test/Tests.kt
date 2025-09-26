@@ -6,50 +6,50 @@ class MaquinaCafeStateMachineTests {
 
     @Test
     fun testIdleAOpciones() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.Idle
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.Opciones)
+        StateMachine.currentState = MaquinaCafeEstados.Idle
+        StateMachine.funcionamientoMaquina()
+        assertTrue(StateMachine.currentState is MaquinaCafeEstados.Opciones)
     }
 
     @Test
     fun testOpcionesASoltarLecheOCalentarAgua() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.Opciones
-        MaquinaCafe.funcionamientoMaquina()
+        StateMachine.currentState = MaquinaCafeEstados.Opciones
+        StateMachine.funcionamientoMaquina()
         assertTrue(
-            MaquinaCafe.currentState is MaquinaCafeEstados.SoltarLeche ||
-                    MaquinaCafe.currentState is MaquinaCafeEstados.CalentarAgua
+            StateMachine.currentState is MaquinaCafeEstados.SoltarLeche ||
+                    StateMachine.currentState is MaquinaCafeEstados.CalentarAgua
         )
     }
 
     @Test
     fun testCalentarAguaASoltarCafe() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.CalentarAgua
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.SoltarCafe)
+        StateMachine.currentState = MaquinaCafeEstados.CalentarAgua
+        StateMachine.funcionamientoMaquina()
+        assertTrue(StateMachine.currentState is MaquinaCafeEstados.SoltarCafe)
     }
 
     @Test
     fun testSoltarLecheASoltarAzucarOCalentarAgua() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.SoltarLeche
-        MaquinaCafe.funcionamientoMaquina()
+        StateMachine.currentState = MaquinaCafeEstados.SoltarLeche
+        StateMachine.funcionamientoMaquina()
         assertTrue(
-            MaquinaCafe.currentState is MaquinaCafeEstados.SoltarAzucar ||
-                    MaquinaCafe.currentState is MaquinaCafeEstados.CalentarAgua
+            StateMachine.currentState is MaquinaCafeEstados.SoltarAzucar ||
+                    StateMachine.currentState is MaquinaCafeEstados.CalentarAgua
         )
     }
 
     @Test
     fun testSoltarCafeFin() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.SoltarCafe
-        MaquinaCafe.funcionamientoMaquina()
+        StateMachine.currentState = MaquinaCafeEstados.SoltarCafe
+        StateMachine.funcionamientoMaquina()
         // El estado no cambia, solo termina la función
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.SoltarCafe)
+        assertTrue(StateMachine.currentState is MaquinaCafeEstados.SoltarCafe)
     }
 
     @Test
     fun testSoltarAzucarACalentarAgua() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.SoltarAzucar(true)
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.CalentarAgua)
+        StateMachine.currentState = MaquinaCafeEstados.SoltarAzucar(true)
+        StateMachine.funcionamientoMaquina()
+        assertTrue(StateMachine.currentState is MaquinaCafeEstados.CalentarAgua)
     }
 }
