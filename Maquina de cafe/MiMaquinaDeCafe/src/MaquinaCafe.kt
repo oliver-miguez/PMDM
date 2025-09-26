@@ -1,8 +1,14 @@
 import java.util.Scanner
 
+/**
+ * Maquina de cafe con estados
+ */
 object MaquinaCafe {
     var currentState:MaquinaCafeEstados = MaquinaCafeEstados.Idle
 
+    /**
+     * Función que gestiona el funcionamiento de la máquina de café
+     */
     fun funcionamientoMaquina(){
         when(currentState){
             is MaquinaCafeEstados.Idle -> {

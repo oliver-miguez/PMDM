@@ -1,3 +1,6 @@
+/**
+ * Estados de la máquina de cafe
+ */
 sealed class MaquinaCafeEstados {
     object Idle: MaquinaCafeEstados()
     object Opciones: MaquinaCafeEstados()
