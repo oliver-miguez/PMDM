@@ -1,5 +1,3 @@
-import StateMachine.currentState
-import java.util.Scanner
 
 /**
  * Estado de la máquina de café
@@ -17,22 +15,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
     object Idle : MaquinaCafeEstados() {
         override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado Idle
             println("Entrando en estado Idle")
-            println("Esperando opciones")
-            stateMachine.setState(Opciones)
-        }
-    }
-
-    object Opciones : MaquinaCafeEstados() {
-        override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado Opciones
-            println("Entrando en estado Opciones")
-            println("1.Soltar Leche")
-            println("2.Calentar agua")
-            println("Elige una opcion: ")
-            var opcion = listOf(1, 2).random()
-            when (opcion) {
-                1 -> stateMachine.setState(SoltarLeche)
-                2 -> stateMachine.setState(CalentarAgua)
-            }
+            stateMachine.setState(CalentarAgua)
         }
     }
 
@@ -40,7 +23,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
         override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado CalentarAgua
             println("Entrando en estado CalentarAgua")
             println("Calentando el agua")
-            stateMachine.setState(SoltarLeche.SoltarCafe)
+            stateMachine.setState(SoltarLeche)
         }
     }
 
@@ -48,10 +31,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
         override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarLeche
             println("Entrando en estado SoltarLeche")
             println("Soltando Leche")
-            var opcion = listOf(1, 2).random()
-            when (opcion) {
-                1 -> stateMachine.setState(SoltarAzucar)
-                2 -> stateMachine.setState(CalentarAgua)
+            stateMachine.setState(SoltarAzucar)
             }
         }
 
@@ -59,7 +39,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarAzucar
                 println("Entrando en estado SoltarAzucar")
                 println("Soltando azucar")
-                stateMachine.setState(CalentarAgua)
+                stateMachine.setState(SoltarCafe)
                 return
             }
         }
@@ -81,5 +61,4 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
                 stateMachine.setState(Idle)
             }
         }
-    }
 }

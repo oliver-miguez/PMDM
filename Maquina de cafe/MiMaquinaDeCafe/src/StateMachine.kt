@@ -9,7 +9,10 @@ object StateMachine {
      * Permite el cambio de estado
      */
     fun setState(state: MaquinaCafeEstados) {
-        currentState = state
+        if (funcionamientoMaquina(currentState,state)) {
+            currentState = state
+        }
+
     }
 
     /**
@@ -28,13 +31,13 @@ object StateMachine {
      */
     fun funcionamientoMaquina(from:MaquinaCafeEstados, to:MaquinaCafeEstados): Boolean {
         return when (from){
-            is MaquinaCafeEstados.Idle -> to == MaquinaCafeEstados.Opciones
-            is MaquinaCafeEstados.Opciones -> to ==  MaquinaCafeEstados.CalentarAgua || to == MaquinaCafeEstados.SoltarLeche.SoltarCafe
-            is MaquinaCafeEstados.SoltarLeche -> to == MaquinaCafeEstados.SoltarLeche.SoltarAzucar || to == MaquinaCafeEstados.CalentarAgua
-            is MaquinaCafeEstados.SoltarLeche.SoltarAzucar -> to == MaquinaCafeEstados.SoltarLeche.SoltarCafe
-            is MaquinaCafeEstados.CalentarAgua -> to == MaquinaCafeEstados.SoltarLeche
-            is MaquinaCafeEstados.SoltarLeche.SoltarCafe -> to == MaquinaCafeEstados.Idle
-            is MaquinaCafeEstados.SoltarLeche.Error -> to == MaquinaCafeEstados.Idle
+             MaquinaCafeEstados.Idle -> to == MaquinaCafeEstados.CalentarAgua
+             MaquinaCafeEstados.SoltarLeche -> to == MaquinaCafeEstados.SoltarAzucar
+             MaquinaCafeEstados.SoltarAzucar  -> to == MaquinaCafeEstados.SoltarCafe
+             MaquinaCafeEstados.CalentarAgua -> to == MaquinaCafeEstados.SoltarLeche
+             MaquinaCafeEstados.SoltarCafe -> to == MaquinaCafeEstados.Idle
+             is MaquinaCafeEstados.Error -> to == MaquinaCafeEstados.Idle
         }
+
     }
 }
