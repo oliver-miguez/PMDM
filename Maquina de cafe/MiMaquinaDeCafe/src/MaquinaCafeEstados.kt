@@ -40,7 +40,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
         override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado CalentarAgua
             println("Entrando en estado CalentarAgua")
             println("Calentando el agua")
-            stateMachine.setState(SoltarCafe)
+            stateMachine.setState(SoltarLeche.SoltarCafe)
         }
     }
 
@@ -50,12 +50,12 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
             println("Soltando Leche")
             var opcion = listOf(1, 2).random()
             when (opcion) {
-                1 -> stateMachine.setState(SoltarAzucar(true))
+                1 -> stateMachine.setState(SoltarAzucar)
                 2 -> stateMachine.setState(CalentarAgua)
             }
         }
 
-        data class SoltarAzucar(val soltar: Boolean) : MaquinaCafeEstados() {
+        object SoltarAzucar : MaquinaCafeEstados(){
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarAzucar
                 println("Entrando en estado SoltarAzucar")
                 println("Soltando azucar")
@@ -69,6 +69,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
                 println("Entrando en estado SoltarCafe")
                 println("Soltando cafe")
                 println("fin")
+                stateMachine.setState(Idle)
                 return
             }
         }
