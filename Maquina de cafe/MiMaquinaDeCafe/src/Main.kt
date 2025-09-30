@@ -13,7 +13,7 @@ fun main() {
         currentState.onEnter(StateMachine) // Ejecutar la acción al entrar en el estado actual, entonces se mueve al siguiente estado
 
         // Salir del bucle si se alcanza el estado Idle después de completar una acción
-        if (currentState is MaquinaCafeEstados.SoltarCafe) {
+        if (currentState is MaquinaCafeEstados.Resetear) {
             println("Ciclo completo. La máquina está lista para una nueva operación.")
             break
         }

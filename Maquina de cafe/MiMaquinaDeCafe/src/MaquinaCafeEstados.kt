@@ -49,7 +49,7 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
                 println("Entrando en estado SoltarCafe")
                 println("Soltando cafe")
                 println("fin")
-                stateMachine.setState(Idle)
+                stateMachine.setState(PreparandoExtra("canela"))
                 return
             }
         }
@@ -58,6 +58,20 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado Error
                 println("Entrando en estado Error")
                 println("Hay algun error")
+                stateMachine.setState(Idle)
+            }
+        }
+       
+        data class PreparandoExtra(val tipoDeExtra: String) : MaquinaCafeEstados() {
+            override fun onEnter(stateMachine: StateMachine) {
+                println("Entrando en PreparandoExtra, añadiendo extra:   ${tipoDeExtra}")
+                stateMachine.setState(Resetear)
+            }
+        }
+        object Resetear : MaquinaCafeEstados() {
+            override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado resetear
+                println("Entrando en estado resetear")
+                println("Reseteando la máquina")
                 stateMachine.setState(Idle)
             }
         }

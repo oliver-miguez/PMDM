@@ -12,9 +12,8 @@ object StateMachine {
         if (funcionamientoMaquina(currentState,state)) {
             currentState = state
         }
-
     }
-
+    
     /**
      * Obtiene el estado actual
      */
@@ -35,8 +34,10 @@ object StateMachine {
              MaquinaCafeEstados.SoltarLeche -> to == MaquinaCafeEstados.SoltarAzucar
              MaquinaCafeEstados.SoltarAzucar  -> to == MaquinaCafeEstados.SoltarCafe
              MaquinaCafeEstados.CalentarAgua -> to == MaquinaCafeEstados.SoltarLeche
-             MaquinaCafeEstados.SoltarCafe -> to == MaquinaCafeEstados.Idle
+             MaquinaCafeEstados.SoltarCafe -> to == MaquinaCafeEstados.PreparandoExtra("canela")
              is MaquinaCafeEstados.Error -> to == MaquinaCafeEstados.Idle
+             is MaquinaCafeEstados.PreparandoExtra -> to == MaquinaCafeEstados.Resetear
+            else -> false
         }
 
     }
