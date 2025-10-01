@@ -6,7 +6,8 @@ stateDiagram-v2
     SoltarLeche --> SoltarAzucar
     SoltarAzucar --> SoltarCafe
     SoltarCafe --> PreparandoExtra: extra = "canela"
-    PreparandoExtra --> Resetear
+    PreparandoExtra --> SoltarExtra
+    SoltarExtra --> Resetear    PreparandoExtra --> Resetear
     Resetear --> Idle
     Idle --> Error
     
