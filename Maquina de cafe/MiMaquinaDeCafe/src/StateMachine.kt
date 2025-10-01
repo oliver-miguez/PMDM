@@ -29,13 +29,15 @@ object StateMachine {
      */
     fun funcionamientoMaquina(from:MaquinaCafeEstados, to:MaquinaCafeEstados): Boolean {
         return when (from){
-             MaquinaCafeEstados.Idle -> to == MaquinaCafeEstados.CalentarAgua
-             MaquinaCafeEstados.SoltarLeche -> to == MaquinaCafeEstados.SoltarAzucar
-             MaquinaCafeEstados.SoltarAzucar  -> to == MaquinaCafeEstados.SoltarCafe
-             MaquinaCafeEstados.CalentarAgua -> to == MaquinaCafeEstados.SoltarLeche
-             MaquinaCafeEstados.SoltarCafe -> to == MaquinaCafeEstados.PreparandoExtra("canela")
-             is MaquinaCafeEstados.Error -> to == MaquinaCafeEstados.Idle
-             is MaquinaCafeEstados.PreparandoExtra -> to == MaquinaCafeEstados.Resetear
+            MaquinaCafeEstados.Idle -> to == MaquinaCafeEstados.CalentarAgua
+            MaquinaCafeEstados.SoltarLeche -> to == MaquinaCafeEstados.SoltarAzucar
+            MaquinaCafeEstados.SoltarAzucar  -> to == MaquinaCafeEstados.SoltarCafe
+            MaquinaCafeEstados.CalentarAgua -> to == MaquinaCafeEstados.SoltarLeche
+            MaquinaCafeEstados.SoltarCafe -> to == MaquinaCafeEstados.Resetear || to == MaquinaCafeEstados.PreparandoExtra("canela")
+            MaquinaCafeEstados.Resetear -> to == MaquinaCafeEstados.Idle || to == MaquinaCafeEstados.PreparandoExtra("canela")
+            is MaquinaCafeEstados.Error -> to == MaquinaCafeEstados.Idle
+            is MaquinaCafeEstados.PreparandoExtra -> to == MaquinaCafeEstados.Resetear
+
             else -> false
         }
     }

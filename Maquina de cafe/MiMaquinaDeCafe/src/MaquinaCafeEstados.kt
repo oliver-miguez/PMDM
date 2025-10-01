@@ -1,3 +1,4 @@
+
 /**
  * Estado de la máquina de café
  * Obliga a todos los estados a implementar la función onEnter
@@ -54,17 +55,26 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
 
     /**
      * Estado SoltarCafe, al entrar en este estado se suelta el café y se pasa al siguiente estado
+     * Si no se sirve canela reseatea la máquina
      */
-        object SoltarCafe : MaquinaCafeEstados() {
-            override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarCafe
-                println("Entrando en estado SoltarCafe")
-                println("Soltando cafe")
-                println("fin")
+    object SoltarCafe : MaquinaCafeEstados() {
+        override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarCafe
+            println("Entrando en estado SoltarCafe")
+            println("Soltando cafe")
+            println("fin")
+            if (deberiaServirCanela()) { // Simula la decisión de si se debe servir canela o no
                 stateMachine.setState(PreparandoExtra("canela"))
-                return
+            } else {
+                stateMachine.setState(Resetear)
             }
         }
+    }
 
+    fun deberiaServirCanela(): Boolean {
+        // Lógica para decidir si se debe servir canela o no
+        return false // Por defecto, siempre sirve canela
+
+    }
     /**
      * Estado Error, al entrar en este estado se muestra un mensaje de error y se pasa al estado Idle
      */
