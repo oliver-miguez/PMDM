@@ -1,8 +1,8 @@
-
 /**
  * Simulación de una máquina de café utilizando un autómata finito.
  * La máquina tiene varios estados y transiciones entre ellos basadas en las acciones del usuario.
- */
+ * @author Oliver Míguez Alonso
+ * */
 fun main() {
     // Inicializar la máquina de café en el estado Idle
     StateMachine.updateState(MaquinaCafeEstados.Idle)
@@ -18,5 +18,4 @@ fun main() {
             break
         }
     }
-
 }

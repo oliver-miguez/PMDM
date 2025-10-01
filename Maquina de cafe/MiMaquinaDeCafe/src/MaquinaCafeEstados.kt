@@ -1,4 +1,3 @@
-
 /**
  * Estado de la máquina de café
  * Obliga a todos los estados a implementar la función onEnter
@@ -19,6 +18,9 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
         }
     }
 
+    /**
+     * Estado CalentarAgua, al entrar en este estado se calienta el agua y se pasa al siguiente estado
+     */
     object CalentarAgua : MaquinaCafeEstados() {
         override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado CalentarAgua
             println("Entrando en estado CalentarAgua")
@@ -27,6 +29,9 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
         }
     }
 
+    /**
+     * Estado SoltarLeche, al entrar en este estado se suelta la leche y se pasa al siguiente estado
+     */
     object SoltarLeche : MaquinaCafeEstados() {
         override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarLeche
             println("Entrando en estado SoltarLeche")
@@ -35,6 +40,9 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
             }
         }
 
+    /**
+     * Estado SoltarAzucar, al entrar en este estado se suelta el azúcar y se pasa al siguiente estado
+     */
         object SoltarAzucar : MaquinaCafeEstados(){
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarAzucar
                 println("Entrando en estado SoltarAzucar")
@@ -44,6 +52,9 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
             }
         }
 
+    /**
+     * Estado SoltarCafe, al entrar en este estado se suelta el café y se pasa al siguiente estado
+     */
         object SoltarCafe : MaquinaCafeEstados() {
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado SoltarCafe
                 println("Entrando en estado SoltarCafe")
@@ -54,6 +65,9 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
             }
         }
 
+    /**
+     * Estado Error, al entrar en este estado se muestra un mensaje de error y se pasa al estado Idle
+     */
         data class Error(val texto: String) : MaquinaCafeEstados() {
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado Error
                 println("Entrando en estado Error")
@@ -61,13 +75,20 @@ sealed class MaquinaCafeEstados: IMaquinaCafeEstados {
                 stateMachine.setState(Idle)
             }
         }
-       
-        data class PreparandoExtra(val tipoDeExtra: String) : MaquinaCafeEstados() {
+
+    /**
+     * Estado PreparandoExtra, al entrar en este estado se prepara el extra y se pasa al siguiente estado
+     */
+    data class PreparandoExtra(val tipoDeExtra: String) : MaquinaCafeEstados() {
             override fun onEnter(stateMachine: StateMachine) {
                 println("Entrando en PreparandoExtra, añadiendo extra:   ${tipoDeExtra}")
                 stateMachine.setState(Resetear)
             }
         }
+
+    /**
+     * Estado Resetear, al entrar en este estado se resetea la máquina y se pasa al estado Idle
+     */
         object Resetear : MaquinaCafeEstados() {
             override fun onEnter(stateMachine: StateMachine) { // Acción al entrar en el estado resetear
                 println("Entrando en estado resetear")

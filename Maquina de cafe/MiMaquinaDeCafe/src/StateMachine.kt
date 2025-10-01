@@ -1,4 +1,3 @@
-
 /**
  * Maquina de cafe con estados
  */
@@ -39,6 +38,5 @@ object StateMachine {
              is MaquinaCafeEstados.PreparandoExtra -> to == MaquinaCafeEstados.Resetear
             else -> false
         }
-
     }
 }

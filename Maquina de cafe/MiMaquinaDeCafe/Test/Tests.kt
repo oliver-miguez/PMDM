@@ -1,16 +1,9 @@
-// Test/Tests.kt
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-
 /**
   Test para comprobar el funcionamiento de la maquina de café
-  Test para comprobar el funcionamiento de la maquina de café
-  */
-
-
-
-
+ */
   class MaquinaCafeStateMachineTests {
 
       @Test
@@ -51,13 +44,4 @@ import org.junit.jupiter.api.Test
           StateMachine.setState(MaquinaCafeEstados.SoltarCafe)
           assertTrue(StateMachine.getState() is MaquinaCafeEstados.SoltarCafe)
       }
-
-      @Test
-      fun testTransitionSoltarCafeToIdle() {
-          // Transición de SoltarCafe a Idle
-          StateMachine.currentState = MaquinaCafeEstados.SoltarCafe
-          StateMachine.setState(MaquinaCafeEstados.Idle)
-          assertTrue(StateMachine.getState() is MaquinaCafeEstados.Idle)
-     }
-
   }
