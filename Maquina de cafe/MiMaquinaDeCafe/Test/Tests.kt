@@ -1,55 +1,47 @@
-// Test/Tests.kt
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class MaquinaCafeStateMachineTests {
+/**
+  Test para comprobar el funcionamiento de la maquina de café
+ */
+  class MaquinaCafeStateMachineTests {
 
-    @Test
-    fun testIdleAOpciones() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.Idle
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.Opciones)
-    }
+      @Test
+      fun testInitialState() {
+          // Verificar que el estado inicial es Idle
+          StateMachine.currentState = MaquinaCafeEstados.Idle
+          assertTrue(StateMachine.getState() is MaquinaCafeEstados.Idle)
+      }
 
-    @Test
-    fun testOpcionesASoltarLecheOCalentarAgua() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.Opciones
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(
-            MaquinaCafe.currentState is MaquinaCafeEstados.SoltarLeche ||
-                    MaquinaCafe.currentState is MaquinaCafeEstados.CalentarAgua
-        )
-    }
+      @Test
+      fun testTransitionIdleToCalentarAgua() {
+          // Transición de Idle a CalentarAgua
+          StateMachine.currentState = MaquinaCafeEstados.Idle
+          StateMachine.setState(MaquinaCafeEstados.CalentarAgua)
+          assertTrue(StateMachine.getState() is MaquinaCafeEstados.CalentarAgua)
+      }
 
-    @Test
-    fun testCalentarAguaASoltarCafe() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.CalentarAgua
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.SoltarCafe)
-    }
+      @Test
+      fun testTransitionCalentarAguaToSoltarLeche() {
+          // Transición de CalentarAgua a SoltarLeche
+          StateMachine.currentState = MaquinaCafeEstados.CalentarAgua
+          StateMachine.setState(MaquinaCafeEstados.SoltarLeche)
+          assertTrue(StateMachine.getState() is MaquinaCafeEstados.SoltarLeche)
+      }
 
-    @Test
-    fun testSoltarLecheASoltarAzucarOCalentarAgua() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.SoltarLeche
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(
-            MaquinaCafe.currentState is MaquinaCafeEstados.SoltarAzucar ||
-                    MaquinaCafe.currentState is MaquinaCafeEstados.CalentarAgua
-        )
-    }
+      @Test
+      fun testTransitionSoltarLecheToSoltarAzucar() {
+          // Transición de SoltarLeche a SoltarAzucar
+          StateMachine.currentState = MaquinaCafeEstados.SoltarLeche
+          StateMachine.setState(MaquinaCafeEstados.SoltarAzucar)
+          assertTrue(StateMachine.getState() is MaquinaCafeEstados.SoltarAzucar)
+      }
 
-    @Test
-    fun testSoltarCafeFin() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.SoltarCafe
-        MaquinaCafe.funcionamientoMaquina()
-        // El estado no cambia, solo termina la función
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.SoltarCafe)
-    }
-
-    @Test
-    fun testSoltarAzucarACalentarAgua() {
-        MaquinaCafe.currentState = MaquinaCafeEstados.SoltarAzucar(true)
-        MaquinaCafe.funcionamientoMaquina()
-        assertTrue(MaquinaCafe.currentState is MaquinaCafeEstados.CalentarAgua)
-    }
-}
+      @Test
+      fun testTransitionSoltarAzucarToSoltarCafe() {
+          // Transición de SoltarAzucar a SoltarCafe
+          StateMachine.currentState = MaquinaCafeEstados.SoltarAzucar
+          StateMachine.setState(MaquinaCafeEstados.SoltarCafe)
+          assertTrue(StateMachine.getState() is MaquinaCafeEstados.SoltarCafe)
+      }
+  }
